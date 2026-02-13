@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order - Stand Makanan Titipan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .modal { display: none; }
+        .modal.active { display: flex; }
+        #adminPanel { display: none; position: fixed; inset: 0; background: white; z-index: 200; overflow-y: auto; }
+        #adminPanel.show { display: block; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #962708; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 overflow-hidden">
+
+    <header onclick="openAdmin()" class="bg-orange-500 text-white p-4 flex justify-between items-center shadow-lg select-none cursor-pointer">
+        <h1 class="text-3xl font-black tracking-tighter">🥗 STAND MAKANAN TITIPAN 🍛</h1>
+        <div class="text-right">
+            <p class="font-bold leading-none text-xl">DASHBOARD KASIR</p>
+            <p class="text-[10px] opacity-70">Klik 5x</p>
+        </div>
+    </header>
+
+    <main class="flex h-[calc(100vh-80px)] p-6 gap-6">
+        
+        <div class="flex-[2] overflow-y-auto pr-2">
+            <h2 class="text-2xl font-black mb-6 flex items-center gap-2">
+                <span class="bg-orange-500 w-2 h-8 rounded-full"></span>
+                PILIH MENU
+            </h2>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-white p-4 rounded-3xl shadow-sm border border-gray-100 flex items-center gap-5 hover:border-orange-300 transition-all">
+                    <img src="" class="w-24 h-24 rounded-2xl object-cover">
+                    <div class="flex-1">
+                        <h3 class="font-black text-lg leading-tight">Ricebowl Ayam Katsu</h3>
+                        <p class="text-orange-600 font-black text-md mb-2">Rp 15.000</p>
+                        <input type="number" min="0" value="0" onchange="hitungTotal()" 
+                               class="menu-item w-full p-2 bg-gray-50 border-2 border-gray-100 rounded-xl text-center font-black text-xl focus:border-orange-500 outline-none" 
+                               data-nama="Ricebowl Ayam Katsu" data-harga="15000">
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-3xl shadow-sm border border-gray-100 flex items-center gap-5 hover:border-orange-300 transition-all">
+                    <img src="" class="w-24 h-24 rounded-2xl object-cover">
+                    <div class="flex-1">
+                        <h3 class="font-black text-lg leading-tight">Ricebowl Ayam Suwir</h3>
+                        <p class="text-orange-600 font-black text-md mb-2">Rp 15.000</p>
+                        <input type="number" min="0" value="0" onchange="hitungTotal()" 
+                               class="menu-item w-full p-2 bg-gray-50 border-2 border-gray-100 rounded-xl text-center font-black text-xl focus:border-orange-500 outline-none" 
+                               data-nama="Ricebowl Ayam Suwir" data-harga="15000">
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-3xl shadow-sm border border-gray-100 flex items-center gap-5 hover:border-orange-300 transition-all">
+                    <img src="" class="w-24 h-24 rounded-2xl object-cover">
+                    <div class="flex-1">
+                        <h3 class="font-black text-lg leading-tight">Ricebowl Kentaki</h3>
+                        <p class="text-orange-600 font-black text-md mb-2">Rp 15.000</p>
+                        <input type="number" min="0" value="0" onchange="hitungTotal()" 
+                               class="menu-item w-full p-2 bg-gray-50 border-2 border-gray-100 rounded-xl text-center font-black text-xl focus:border-orange-500 outline-none" 
+                               data-nama="Ricebowl Kentaki" data-harga="15000">
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-3xl shadow-sm border border-gray-100 flex items-center gap-5 hover:border-orange-300 transition-all">
+                    <img src="" class="w-24 h-24 rounded-2xl object-cover">
+                    <div class="flex-1">
+                        <h3 class="font-black text-lg leading-tight">Nasi Ayam Geprek</h3>
+                        <p class="text-orange-600 font-black text-md mb-2">Rp 15.000</p>
+                        <input type="number" min="0" value="0" onchange="hitungTotal()" 
+                               class="menu-item w-full p-2 bg-gray-50 border-2 border-gray-100 rounded-xl text-center font-black text-xl focus:border-orange-500 outline-none" 
+                               data-nama="Nasi Ayam Geprek" data-harga="15000">
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-3xl shadow-sm border border-gray-100 flex items-center gap-5 hover:border-orange-300 transition-all">
+                    <img src="" class="w-24 h-24 rounded-2xl object-cover">
+                    <div class="flex-1">
+                        <h3 class="font-black text-lg leading-tight">Nasi Kuning Ayam</h3>
+                        <p class="text-orange-600 font-black text-md mb-2">Rp 16.000</p>
+                        <input type="number" min="0" value="0" onchange="hitungTotal()" 
+                               class="menu-item w-full p-2 bg-gray-50 border-2 border-gray-100 rounded-xl text-center font-black text-xl focus:border-orange-500 outline-none" 
+                               data-nama="Nasi Kuning Aya," data-harga="16000">
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-3xl shadow-sm border border-gray-100 flex items-center gap-5 hover:border-orange-300 transition-all">
+                    <img src="" class="w-24 h-24 rounded-2xl object-cover">
+                    <div class="flex-1">
+                        <h3 class="font-black text-lg leading-tight">Nasi Kuning Telur</h3>
+                        <p class="text-orange-600 font-black text-md mb-2">Rp 16.000</p>
+                        <input type="number" min="0" value="0" onchange="hitungTotal()" 
+                               class="menu-item w-full p-2 bg-gray-50 border-2 border-gray-100 rounded-xl text-center font-black text-xl focus:border-orange-500 outline-none" 
+                               data-nama="Nasi Kuning Telur" data-harga="16000">
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-3xl shadow-sm border border-gray-100 flex items-center gap-5 hover:border-orange-300 transition-all">
+                    <img src="" class="w-24 h-24 rounded-2xl object-cover">
+                    <div class="flex-1">
+                        <h3 class="font-black text-lg leading-tight">Nasi Kuning Haruan</h3>
+                        <p class="text-orange-600 font-black text-md mb-2">Rp 19.000</p>
+                        <input type="number" min="0" value="0" onchange="hitungTotal()" 
+                               class="menu-item w-full p-2 bg-gray-50 border-2 border-gray-100 rounded-xl text-center font-black text-xl focus:border-orange-500 outline-none" 
+                               data-nama="Nasi Kuning Haruan" data-harga="19000">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="flex-1 bg-white rounded-[40px] shadow-xl border border-gray-100 p-8 flex flex-col">
+            <h2 class="text-xl font-black mb-6 uppercase tracking-widest text-gray-400">Ringkasan Order</h2>
+            
+            <div class="mb-6">
+                <label class="block text-xs font-black mb-2 text-gray-400 uppercase">Nama Pembeli</label>
+                <input type="text" id="namaPemesan" placeholder="Ketik Nama..." 
+                       class="w-full p-4 bg-gray-50 border-2 border-gray-100 rounded-2xl outline-none focus:border-orange-500 font-black text-xl">
+            </div>
+
+            <div class="mb-8">
+                <label class="block text-xs font-black mb-3 text-gray-400 uppercase">Pilih Metode Pembayaran</label>
+                <div class="grid grid-cols-2 gap-4">
+                    <label class="flex flex-col items-center p-4 border-2 rounded-2xl cursor-pointer hover:bg-orange-50 transition border-gray-100 has-[:checked]:border-orange-500 has-[:checked]:bg-orange-50">
+                        <input type="radio" name="payment" value="Tunai" checked class="hidden">
+                        <span class="text-2xl mb-1">💵</span>
+                        <span class="font-bold text-sm">TUNAI</span>
+                    </label>
+                    <label class="flex flex-col items-center p-4 border-2 rounded-2xl cursor-pointer hover:bg-orange-50 transition border-gray-100 has-[:checked]:border-orange-500 has-[:checked]:bg-orange-50">
+                        <input type="radio" name="payment" value="QRIS" class="hidden">
+                        <span class="text-2xl mb-1">📱</span>
+                        <span class="font-bold text-sm">QRIS</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="mt-auto border-t-4 border-dashed pt-6">
+                <div class="flex justify-between items-end mb-6">
+                    <span class="font-bold text-gray-400">TOTAL HARGA</span>
+                    <span id="displayTotal" class="text-5xl font-black text-orange-600">Rp 0</span>
+                </div>
+                <button onclick="prosesOrder()" class="w-full bg-orange-500 hover:bg-orange-600 text-white py-6 rounded-3xl font-black text-2xl shadow-xl shadow-orange-100 transition-all active:scale-95">
+                    PESAN SEKARANG
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <div id="mainModal" class="modal fixed inset-0 bg-black/90 backdrop-blur-md items-center justify-center p-10 z-[100]">
+        <div class="bg-white rounded-[50px] w-full max-w-2xl overflow-hidden shadow-2xl flex border-8 border-orange-500">
+            <div class="flex-1 bg-orange-50 flex flex-col items-center justify-center p-10 border-r border-gray-100">
+                <div id="modalIcon" class="text-9xl mb-6">🥤</div>
+                <p id="modalTotal" class="text-5xl font-black text-gray-800 text-center">Rp 0</p>
+            </div>
+            
+            <div class="flex-1 p-12 flex flex-col justify-center text-center">
+                <div id="contentQRIS" class="hidden">
+                    <h2 class="text-3xl font-black mb-6">SCAN QRIS</h2>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=STAND_IC" class="w-64 h-64 mx-auto border-4 border-white shadow-lg mb-6">
+                    <p class="text-gray-400 font-bold uppercase tracking-widest text-sm underline">Terimakasih telah membeli! Dimohon menunjukkan bukti ke kasir🙏🏻</p>
+                </div>
+
+                <div id="contentTunai" class="hidden">
+                    <h2 class="text-4xl font-black mb-6 text-orange-600 italic">SIAP!<br>TERIMA KASIH</h2>
+                    <p class="text-xl font-bold text-gray-500 leading-relaxed mb-6">Silahkan melakukan pembayaran di Kasir</p>
+                </div>
+
+                <button onclick="resetApp()" class="mt-8 bg-gray-900 text-white py-5 px-10 rounded-2xl font-black text-xl hover:bg-black transition-all">
+                    TUTUP & PESANAN BARU
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="adminPanel" class="p-10">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex justify-between items-center mb-10">
+                <h2 class="text-4xl font-black">LAPORAN PENJUALAN 📈</h2>
+                <button onclick="closeAdmin()" class="bg-gray-100 px-6 py-3 rounded-2xl font-black">✕ TUTUP DASHBOARD</button>
+            </div>
+            <div class="grid grid-cols-3 gap-6 mb-10">
+                <div class="bg-orange-500 p-8 rounded-[40px] text-white shadow-xl">
+                    <p class="font-bold opacity-80 uppercase text-xs mb-2">Total Omset</p>
+                    <p id="totalPendapatan" class="text-4xl font-black">Rp 0</p>
+                </div>
+                <div class="bg-white p-8 rounded-[40px] border border-gray-100 shadow-sm col-span-2 flex justify-between items-center">
+                    <p class="text-gray-400 font-medium">Data disimpan secara otomatis di browser ini.</p>
+                    <button onclick="hapusSemuaData()" class="bg-red-50 text-red-500 px-6 py-3 rounded-xl font-bold hover:bg-red-500 hover:text-white transition-all">RESET DATA</button>
+                </div>
+            </div>
+            <div id="rekapContainer" class="grid grid-cols-1 gap-4"></div>
+        </div>
+    </div>
+
+    <script>
+        let clickCount = 0;
+
+function hitungTotal() {
+    let total = 0;
+    document.querySelectorAll('.menu-item').forEach(item => {
+        const qty = parseInt(item.value) || 0;
+        const harga = parseInt(item.getAttribute('data-harga')) || 0;
+        total += qty * harga;
+    });
+    const text = "Rp " + total.toLocaleString('id-ID');
+    document.getElementById('displayTotal').innerText = text;
+    document.getElementById('modalTotal').innerText = text;
+}
+
+function simpanPesanan(nama, detail, total, metode) {
+    // 1. Tetap simpan di LocalStorage (untuk laporan di Dashboard Kasir)
+    let riwayat = JSON.parse(localStorage.getItem('riwayatPesanan')) || [];
+    const waktu = new Date().toLocaleString('id-ID');
+    const baru = {
+        nama: nama,
+        detail: detail,
+        total: total,
+        metode: metode,
+        waktu: waktu
+    };
+    riwayat.unshift(baru); 
+    localStorage.setItem('riwayatPesanan', JSON.stringify(riwayat));
+
+   
+    const formData = new FormData();
+    formData.append("waktu", waktu);
+    formData.append("nama", nama);
+    formData.append("detail", detail);
+    formData.append("total", total);
+    formData.append("metode", metode);
+
+    fetch(WEB_APP_URL, {
+        method: "POST",
+        body: formData,
+        mode: "no-cors" // Penting agar tidak kena blokir CORS
+    })
+    .then(() => console.log("Data berhasil dikirim ke Google Sheets!"))
+    .catch(err => console.error("Gagal mengirim ke Sheets:", err));
+}
+
+function prosesOrder() {
+    const nama = document.getElementById('namaPemesan').value.trim();
+    let qtyTotal = 0;
+    let listPesanan = [];
+    let totalHarga = 0;
+
+    document.querySelectorAll('.menu-item').forEach(item => {
+        const qty = parseInt(item.value) || 0;
+        if(qty > 0) {
+            qtyTotal += qty;
+            totalHarga += qty * parseInt(item.getAttribute('data-harga'));
+            listPesanan.push(`${item.getAttribute('data-nama')} (${qty})`);
+        }
+    });
+
+    if(!nama) return alert("📢 Nama Pembeli wajib diisi yaa!");
+    if(qtyTotal === 0) return alert("📢 Belum ada menu yang dipilih:(");
+
+    const metode = document.querySelector('input[name="payment"]:checked').value;
+    
+    simpanPesanan(nama, listPesanan.join(", "), totalHarga, metode);
+
+    document.getElementById('mainModal').classList.add('active');
+    if (metode === "QRIS") {
+        document.getElementById('contentQRIS').classList.remove('hidden');
+        document.getElementById('contentTunai').classList.add('hidden');
+        document.getElementById('modalIcon').innerText = "📱";
+    } else {
+        document.getElementById('contentTunai').classList.remove('hidden');
+        document.getElementById('contentQRIS').classList.add('hidden');
+        document.getElementById('modalIcon').innerText = "💵";
+    }
+}
+
+
+        
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzHkvZ-lkhke2kmtbawjI-ZPSY2kbKptENHyFPZCGY1mfPtQkiNPKTCe1x0hyP-aFE/exec";
+
+
+            
+        
+
+        function tampilkanRekap() {
+            const container = document.getElementById('rekapContainer');
+            let riwayat = JSON.parse(localStorage.getItem('riwayatPesanan')) || [];
+            let pendapatan = 0;
+
+            if(riwayat.length === 0) {
+                container.innerHTML = `<p class="text-center text-gray-400 py-10 italic">Belum ada transaksi hari ini.</p>`;
+                document.getElementById('totalPendapatan').innerText = "Rp 0";
+                return;
+            }
+
+            container.innerHTML = riwayat.map(order => {
+                pendapatan += order.total;
+                return `
+                <div class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm flex justify-between items-center">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1 text-[10px] font-black text-gray-400">
+                            <span>${order.waktu}</span> • <span class="text-orange-500">${order.metode}</span>
+                        </div>
+                        <p class="font-black text-xl">${order.nama}</p>
+                        <p class="text-xs text-gray-400">${order.detail}</p>
+                    </div>
+                    <p class="font-black text-2xl text-orange-600">Rp ${order.total.toLocaleString('id-ID')}</p>
+                </div>`;
+            }).join('');
+
+            document.getElementById('totalPendapatan').innerText = "Rp " + pendapatan.toLocaleString('id-ID');
+        }
+
+        function openAdmin() {
+            clickCount++;
+            if(clickCount >= 5) {
+                document.getElementById('adminPanel').classList.add('show');
+                tampilkanRekap();
+                clickCount = 0;
+            }
+            setTimeout(() => clickCount = 0, 2000);
+        }
+
+        function closeAdmin() { document.getElementById('adminPanel').classList.remove('show'); }
+
+        function hapusSemuaData() {
+            if(confirm("Hapus semua riwayat transaksi?")) {
+                localStorage.removeItem('riwayatPesanan');
+                tampilkanRekap();
+            }
+        }
+
+        function resetApp() {
+            document.getElementById('mainModal').classList.remove('active');
+            document.getElementById('namaPemesan').value = "";
+            document.querySelectorAll('.menu-item').forEach(item => item.value = 0);
+            hitungTotal();
+        }
+    </script>
+</body>
+</html>
